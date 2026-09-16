@@ -2,13 +2,12 @@ const config = {
     type: Phaser.AUTO,
     scale: {
         width: 800,
-        height: 720
+        height: 600
     },
     backgroundColor: '#028af8',
     physics: {
         default: 'arcade',
         arcade: { 
-            gravity: { y: 0 },
             debug: false
         }
     },
