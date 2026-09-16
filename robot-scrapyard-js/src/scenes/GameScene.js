@@ -1,26 +1,36 @@
+// import Player from '..entities/player';
+// import Inventory from '.data/inventory.js';
+// import BulletManager from '../entities/bulletmanager.js';
+
 class GameScene extends Phaser.Scene {
-    #cursorKeys;
-    #player;
     constructor() {
         super({ key: 'GameScene' });
     }
     preload() {
         // Basic format for adding image for preload
-        //this.load.image('key for image', 'path to image');
+        //this.load.image('asset key', 'path to image');
     }
     create() {
-        // // Player setup
-        this.#player = this.physics.add.sprite(375, 300, 'player');
-        this.#player.setCollideWorldBounds(true);   // Prevents player from going outside the world bounds
-        this.#player.body.setMaxSpeed(100);
-        // // Input setup (keys rebound to WASD instead of arrows)
-        // const keys = this.input.keyboard.addKeys({
-        //     up: Phaser.Input.Keyboard.KeyCodes.W,
-        //     down: Phaser.Input.Keyboard.KeyCodes.S,
-        //     left: Phaser.Input.Keyboard.KeyCodes.A,
-        //     right: Phaser.Input.Keyboard.KeyCodes.D,
-        // })
-        this.#cursorKeys = this.input.keyboard.createCursorKeys();
+        player = this.physics.add.sprite(200, 200, 'player');
+        cursors = input.keyboard.createCursorKeys();
+        player.setCollideWorldBounds(true);    // Prevents player from going outside the world bounds
+        player.body.setSize(20, 20)
+        // Game and Player Setup
+        // this.inventory = new Inventory();
+        // this.player = new Player(this, 375, 300);
+        // this.weaponSystem = new BulletManager(this);
+
+        // Handle pointer down for shooting
+        // this.input.on('pointerdown', (pointer) => {
+        //     this.player.handleInput(pointer);
+        // });
+
+        // Handle bullet clean up when hitting world bounds
+        // this.physics.world.on('worldbounds', (body) => {
+        //     if (body.gameObject.texture.key === 'bullet') {
+        //         this.weaponSystem.bullets.killAndHide(body.gameObject);
+        //     }
+        // });
         // // Mouse Aiming and setup
         // this.input.mouse.disableContextMenu();  // Disables the right-click for OS to prevent interference with gameplay
         // const pointer = this.input.activePointer;
@@ -43,16 +53,21 @@ class GameScene extends Phaser.Scene {
         // End of Placeholder Text
     }
     update() {
-        //Player Movement with remapped directional keys
-        if (this.#cursorKeys.left.isDown) {
-            this.#player.x -= 5;
-        } else if (this.#cursorKeys.right.isDown) {
-            this.#player.x += 5;
+        // this.player.update();
+        if (this.cursors.left.isDown) {
+            this.setVelocityX(-this.speed);
+        } else if (this.cursors.right.isDown) {
+            this.setVelocityX(this.speed);
+        } else {
+            this.setVelocityX(0);
         }
-        if (this.#cursorKeys.up.isDown) {
-            this.#player.y -= 5;
-        } else if (this.#cursorKeys.down.isDown) {
-            this.#player.y += 5;
+
+        if (this.cursors.up.isDown) {
+            this.setVelocityY(-this.speed);
+        } else if (this.cursors.down.isDown) {
+            this.setVelocityY(this.speed);
+        } else {
+            this.setVelocityY(0);
         }
     }
 }
