@@ -1,9 +1,7 @@
 const config = {
     type: Phaser.AUTO,
-    scale: {
-        width: 800,
-        height: 600
-    },
+    width: 800,    //480 for 16:9 aspect ratio
+    height: 600,    //270 for 16:9 aspect ratio
     backgroundColor: '#028af8',
     physics: {
         default: 'arcade',

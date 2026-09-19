@@ -6,9 +6,11 @@ class StartScene extends Phaser.Scene {
 		
 	}
     create() {
+		const centerX = this.scale.width / 2;
+		const centerY = this.scale.height / 2;
 		// The title splash text
-		const titleText = this.add.text( 250, 200, 'Robot Scrapyard', {fill: '#ffffff', fontSize: '30px'}) // 'Robot Scrapyard'
-		const startText = this.add.text( 300, 275, 'Click to start!', {fill: '#ffffff', fontSize: '20px'}) // 'Click to start!'
+		const titleText = this.add.text( centerX, (centerY - 150), 'Robot Scrapyard', {fill: '#ffffff', fontSize: '30px'}).setOrigin(0.5);
+		const startText = this.add.text( (centerX), (centerY - 100), 'Press SPACE to start!', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
 		// This tween animation causes the startText to flash
 		this.tweens.add({
 			targets: startText,
@@ -19,7 +21,7 @@ class StartScene extends Phaser.Scene {
 			repeat: -1
 		})
 		// This changes the scene from 'StartScene' to 'GameScene'
-		this.input.on('pointerdown', () => {
+		this.input.keyboard.on('keydown-SPACE', () => {
 			this.scene.stop('StartScene')
 			this.scene.start('GameScene')
 		})
