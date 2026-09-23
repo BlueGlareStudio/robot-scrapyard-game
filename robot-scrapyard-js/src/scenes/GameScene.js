@@ -7,6 +7,12 @@ class GameScene extends Phaser.Scene {
         player.setTint(0xff0000);
         this.time.delayedCall(700, () => player.clearTint());
     }
+    enemyCollision(bullet, enemy) {
+        bullet.destroy();
+        enemy.destroy();
+        this.score += 10;
+        this.scoreText.setText('Score: ' + this.score);
+    }
     spawnEnemy(texture) {
         let randX = Phaser.Math.Between(1, 1280);
         let randY = Phaser.Math.Between(1, 720);
@@ -20,10 +26,13 @@ class GameScene extends Phaser.Scene {
             bullet.setPosition(this.player.x, this.player.y);
         }
         let angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, pointer.x, pointer.y);
-        this.physics.velocityFromRotation(angle, 800, bullet.body.velocity);
+        this.physics.velocityFromRotation(angle, 500, bullet.body.velocity);    // Integer represents bullet speed
         bullet.roation = angle;
     }
-    
+    winGame() {
+        // this.scene.pause('GameScene');
+        // this.winText = this.add.text(centerX, centerY, 'You Win!', {fill: '#ffffff', fontSize: '35px'}).setOrigin(0.5);
+    }
     preload() {
         this.load.image('player', 'assets/images/player.png');
         this.load.image('enemy', 'assets/images/enemy.png');
@@ -41,31 +50,34 @@ class GameScene extends Phaser.Scene {
             left: 'A',
             right: 'D'
         });
+        this.score = 0;
 
         // Player Setup
         this.player = this.physics.add.sprite(200, 200, 'player').setScale(0.1);
         this.player.setCollideWorldBounds(true);
 
         // Enemy Setup
-        this.enemies = this.physics.add.group();
-        this.enemyChild = this.enemies.getChildren();
+        this.enemies = this.physics.add.group({
+            defaultKey: 'enemy'
+        });
         this.input.keyboard.on('keydown-SPACE', () => {
             this.spawnEnemy('enemy');
         });
 
-        // Collision Setup
-        this.physics.add.overlap(this.player, this.enemies, this.playerCollision, null, this);
-
-        // Bullet Setup
+        // Bullet and Shooting Setup
         this.bullets = this.physics.add.group({
-            defaultKey: 'bullet',
-            maxSize: 30
+            defaultKey: 'bullet'
         });
-        this.input.on('pointerup', (pointer) => {
+        this.input.on('pointerdown', (pointer) => {
             this.fireBullet(pointer);
         });
 
+        // Collision Setup
+        this.physics.add.overlap(this.player, this.enemies, this.playerCollision, null, this);
+        this.physics.add.overlap(this.bullets, this.enemies, this.enemyCollision, null, this);
+
         // Return to Menu Text and Code
+        this.scoreText = this.add.text(centerX, (centerY - 275), 'Score: 0', {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
         this.add.text( centerX, (centerY - 300), 'BACKSPACE to return to Start', {fill: '#ffffff', fontSize: '15px'}).setOrigin(0.5);
         this.input.keyboard.on('keydown-BACKSPACE', () => {
 			this.scene.stop('GameScene')
@@ -75,7 +87,7 @@ class GameScene extends Phaser.Scene {
 
     update() {
         // Player Movement
-        let playerSpeed = 125;    // Default: 125
+        let playerSpeed = 100;    // Default: 100
         if (this.moveKeys.left.isDown) {
             this.player.setFlipX(true);
             this.player.setVelocityX(-playerSpeed);
@@ -92,5 +104,9 @@ class GameScene extends Phaser.Scene {
         } else {
             this.player.setVelocityY(0);
         }
+        // Win Requirements
+        // if (this.score >= 100) {
+        //     this.winGame();
+        // }
     }
 }
