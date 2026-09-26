@@ -12,7 +12,7 @@ Beginning of development. Framwork for game completed. The game window with text
 
 
 
-The player was added with default sprite. Movement was added along the play area.
+The player was added with placeholder sprite. Movement was added along the play area.
 
 
 
@@ -62,4 +62,20 @@ A basic shooting animation has been implemented. I'm using a placeholder sprite 
 
 
 The framework for the collision detection between enemies and the player's bullets was created. I was having issues previously with this system. There error was that the line for the collision was too high up on the script. The bullet group was added after, not before like it should be. It was fixed. A small list was created for the splash text that appears below the title of the game at the start screen. It randomly chooses between the few options that were hardcoded. It is similar to Minecraft. A small text on the GameScene was added to display the score. The score system adds 10 points whenever an enemy is hit with a bullet. A win and lose condition needs to be set.
+
+
+
+### Sept 24 2026
+
+
+
+A restart/try again feature was added to the 'GameScene' scene. A for loop was added to spawn 10 enemies at random positions at start of 'GameScene.'
+
+
+
+### Sept 26 2026
+
+
+
+I refactored some of the code within the 'StartScene' and 'GameScene' files to group sections of the code together. A 'BaseScene' was also created and implemented to be used as the upgrade/trophy section of the game. A series of buttons were added to test increasing and decreasing player stats amongst all the levels or 'scenes'. This scene will be used later for player upgrades and loadout selection before starting a round of the game. A flow was added for the scenes ('StartScene' <-> 'BaseScene' <-> 'GameScene'). The win condition of that game has been started on. With the current build of the game, it crashes when the conditions are met.
 

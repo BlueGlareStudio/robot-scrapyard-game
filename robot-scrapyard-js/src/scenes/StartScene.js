@@ -8,13 +8,11 @@ class StartScene extends Phaser.Scene {
     create() {
 		const centerX = this.scale.width / 2;
 		const centerY = this.scale.height / 2;
-		const button = this.add.rectangle(centerX, centerY, 200, 50, 0xff0000).setInteractive();
+		const titleText = this.add.text( centerX, (centerY - 150), 'Robot Scrapyard JS', {fill: '#ffffff', fontSize: '50px'}).setOrigin(0.5);
+		// The title splash text
 		const randInt = Phaser.Math.Between(0, 3);
 		const startText = ['IN A VAN DOWN BY THE RIVER', 'VEGAN FRIENDLY', 'NOT ROBOT FRIENDLY', 'MADE IN 2026'];
-		// The title splash text
-		const titleText = this.add.text( centerX, (centerY - 150), 'Robot Scrapyard', {fill: '#ffffff', fontSize: '30px'}).setOrigin(0.5);
-		const splashText = this.add.text( centerX, (centerY - 120), startText[randInt], {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
-		const buttonText = this.add.text( centerX, centerY, 'START', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
+		const splashText = this.add.text( centerX, (centerY - 100), startText[randInt], {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
 		// This tween animation causes the startText to flash
 		this.tweens.add({
 			targets: splashText,
@@ -24,10 +22,12 @@ class StartScene extends Phaser.Scene {
 			yoyo: true,
 			repeat: -1
 		});
-		// This changes the scene from 'StartScene' to 'GameScene'
-		button.on('pointerup', () => {
+		// Base Button
+		const baseButton = this.add.rectangle(centerX, centerY, 200, 50, 0x363636).setInteractive();
+		const baseButtonText = this.add.text(centerX, centerY, 'Go To Base', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
+		baseButton.on('pointerup', () => {
 			this.scene.stop('StartScene')
-			this.scene.start('GameScene')
-		})
+			this.scene.start('BaseScene')
+		});
 	}
 }

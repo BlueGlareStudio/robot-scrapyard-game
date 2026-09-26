@@ -10,12 +10,15 @@ class GameScene extends Phaser.Scene {
     enemyCollision(bullet, enemy) {
         bullet.destroy();
         enemy.destroy();
-        this.score += 10;
+        this.score += 50;
         this.scoreText.setText('Score: ' + this.score);
+        if (this.score === 100) {
+            this.winGame();
+        }
     }
     spawnEnemy(texture) {
-        let randX = Phaser.Math.Between(1, 1280);
-        let randY = Phaser.Math.Between(1, 720);
+        let randX = Phaser.Math.Between(1, 1200);
+        let randY = Phaser.Math.Between(1, 700);
         const enemy = this.enemies.create(randX, randY, texture).setScale(0.1);
     }
     fireBullet(pointer) {
@@ -31,7 +34,7 @@ class GameScene extends Phaser.Scene {
     }
     winGame() {
         // this.scene.pause('GameScene');
-        // this.winText = this.add.text(centerX, centerY, 'You Win!', {fill: '#ffffff', fontSize: '35px'}).setOrigin(0.5);
+        const winText = this.add.text(centerX, centerY, 'You Win!', {fill: '#ffffff', fontSize: '35px'}).setOrigin(0.5);
     }
     preload() {
         this.load.image('player', 'assets/images/player.png');
@@ -51,18 +54,22 @@ class GameScene extends Phaser.Scene {
             right: 'D'
         });
         this.score = 0;
+        this.scoreText = this.add.text(centerX, (centerY + 300), 'Press R to Restart', {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
+        this.input.keyboard.on('keydown-R', () => {
+            this.scene.start('GameScene');
+        });
 
         // Player Setup
-        this.player = this.physics.add.sprite(200, 200, 'player').setScale(0.1);
+        this.player = this.physics.add.sprite(centerX, centerY, 'player').setScale(0.1);
         this.player.setCollideWorldBounds(true);
 
         // Enemy Setup
         this.enemies = this.physics.add.group({
             defaultKey: 'enemy'
         });
-        this.input.keyboard.on('keydown-SPACE', () => {
-            this.spawnEnemy('enemy');
-        });
+        for (let i = 0; i < 10; i++) {    // Spawns 10 enemies then stops
+            this.spawnEnemy();
+        };
 
         // Bullet and Shooting Setup
         this.bullets = this.physics.add.group({
@@ -78,10 +85,10 @@ class GameScene extends Phaser.Scene {
 
         // Return to Menu Text and Code
         this.scoreText = this.add.text(centerX, (centerY - 275), 'Score: 0', {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
-        this.add.text( centerX, (centerY - 300), 'BACKSPACE to return to Start', {fill: '#ffffff', fontSize: '15px'}).setOrigin(0.5);
+        this.add.text( centerX, (centerY - 300), 'BACKSPACE to return to Base', {fill: '#ffffff', fontSize: '15px'}).setOrigin(0.5);
         this.input.keyboard.on('keydown-BACKSPACE', () => {
 			this.scene.stop('GameScene')
-			this.scene.start('StartScene')
+			this.scene.start('BaseScene')
 		});
     }
 
@@ -104,9 +111,5 @@ class GameScene extends Phaser.Scene {
         } else {
             this.player.setVelocityY(0);
         }
-        // Win Requirements
-        // if (this.score >= 100) {
-        //     this.winGame();
-        // }
     }
 }
