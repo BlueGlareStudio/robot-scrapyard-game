@@ -27,6 +27,7 @@ class StartScene extends Phaser.Scene {
 		const baseButtonText = this.add.text(centerX, centerY, 'Go To Base', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
 		baseButton.on('pointerup', () => {
 			this.scene.stop('StartScene')
+			this.scene.start('HudScene')
 			this.scene.start('BaseScene')
 		});
 		// Registry
@@ -36,5 +37,6 @@ class StartScene extends Phaser.Scene {
 		//this.registry.set('scrap', 0);
 		//this.registry.set('oil', 0);
 		this.registry.set('score', 0);
+        this.registry.set('ammo', 0);
 	}
 }

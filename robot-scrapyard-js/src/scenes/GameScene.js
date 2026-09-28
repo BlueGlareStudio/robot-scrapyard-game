@@ -18,15 +18,20 @@ class GameScene extends Phaser.Scene {
         const enemy = this.enemies.create(randX, randY, texture).setScale(0.1);
     }
     fireBullet(pointer) {
-        let bullet = this.bullets.get(this.player.x, this.player.y).setScale(0.1);
-        if (bullet) {
-            bullet.setActive(true);
-            bullet.setVisible(true);
-            bullet.setPosition(this.player.x, this.player.y);
+        if (this.registry.values.ammo > 0) {
+            let bullet = this.bullets.get(this.player.x, this.player.y).setScale(0.1);
+            if (bullet) {
+                bullet.setActive(true);
+                bullet.setVisible(true);
+                bullet.setPosition(this.player.x, this.player.y);
+            }
+            let angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, pointer.x, pointer.y);
+            this.physics.velocityFromRotation(angle, 500, bullet.body.velocity);    // Integer represents bullet speed
+            bullet.roation = angle;
+            this.registry.inc('ammo', -1);
+        } else {
+            console.log('OUT OF AMMO');
         }
-        let angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, pointer.x, pointer.y);
-        this.physics.velocityFromRotation(angle, 500, bullet.body.velocity);    // Integer represents bullet speed
-        bullet.roation = angle;
     }
 
     preload() {
@@ -47,6 +52,7 @@ class GameScene extends Phaser.Scene {
             right: 'D'
         });
         let score = this.registry.values.score;
+        let ammo = this.registry.values.ammo;
         
         // Player Setup
         this.player = this.physics.add.sprite(centerX, centerY, 'player').setScale(0.1);
@@ -78,6 +84,7 @@ class GameScene extends Phaser.Scene {
             this.scene.start('GameScene');
         });
         this.scoreText = this.add.text(centerX, (centerY - 275), `Score: ${score}`, {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
+        this.ammoText = this.add.text(centerX, (centerY - 200), `Ammo: ${ammo}`, {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
         this.add.text( centerX, (centerY - 300), 'BACKSPACE to return to Base', {fill: '#ffffff', fontSize: '15px'}).setOrigin(0.5);
         this.input.keyboard.on('keydown-BACKSPACE', () => {
 			this.scene.stop('GameScene')

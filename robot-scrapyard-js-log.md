@@ -85,5 +85,5 @@ I refactored some of the code within the 'StartScene' and 'GameScene' files to g
 
 
 
-A base resolution for the game was set (width: 1280, height: 720). A scaling object was added to 'main.js'. The Phaser.Scale.FIT and Phaser.Scale.CENTER\_BOTH were added to scale the game window to help fit whatever device is being used. A feature within the enemyCollision() method that increments the 'score' value when an enemy is destroyed. Within the 'BaseScene', the upgrade buttons work with registry code.
+A base resolution for the game was set (width: 1280, height: 720). A scaling object was added to 'main.js'. The Phaser.Scale.FIT and Phaser.Scale.CENTER\_BOTH were added to scale the game window to help fit whatever device is being used. A feature within the enemyCollision() method that increments the 'score' value when an enemy is destroyed. Within the 'BaseScene', the upgrade buttons work with registry code. A HUD feature was added with the 'HudScene'. Basic control texts are being used to test HUD. An ammo registry value was created and an registry ammo counter was created. CURRENTLY NONE OF THE REGISTRY VALUES ARE LIVE.
 

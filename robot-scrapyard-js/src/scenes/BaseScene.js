@@ -20,6 +20,16 @@ class BaseScene extends Phaser.Scene {
         // Player Setup
         this.physics.add.sprite(centerX, centerY - 45, 'player').setScale(0.5);
 
+        // Ammo
+        const playerAmmoLabel = this.add.rectangle(centerX - 375, centerY - 150, 200, 50, 0x363636);
+		const playerAmmoLabelText = this.add.text(centerX - 375, centerY - 150, 'Ammo', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
+        const playerAmmoUp = this.add.rectangle(centerX - 250, centerY - 150, 50, 50, 0x57f774).setInteractive();
+        const playerAmmoUpText = this.add.text(centerX - 250, centerY - 150, '+', {fill: '#000000', fontSize: '20px'}).setOrigin(0.5); 
+        playerAmmoUp.on('pointerdown', () => {
+            this.registry.inc('ammo', 10);
+            console.log('10 ammo added.');
+        });
+
         // Speed
         const playerSpeedLabel = this.add.rectangle(centerX + 375, centerY + 50, 200, 50, 0x363636);
 		const playerSpeedLabelText = this.add.text(centerX + 375, centerY + 50, 'Speed', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
@@ -64,7 +74,7 @@ class BaseScene extends Phaser.Scene {
 
         // Game Button
 		const gameButton = this.add.rectangle(centerX + 500, centerY + 300, 200, 50, 0x363636).setInteractive();
-		const gameButtonText = this.add.text( centerX + 500, centerY + 300, 'Go To Arena', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
+		const gameButtonText = this.add.text( centerX + 500, centerY + 300, 'Fight', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
 
 		// This changes the scene from 'BaseScene' to 'GameScene'
 		gameButton.on('pointerup', () => {
@@ -75,6 +85,7 @@ class BaseScene extends Phaser.Scene {
         this.add.text( centerX, (centerY - 300), 'BACKSPACE to return to Start Screen', {fill: '#ffffff', fontSize: '15px'}).setOrigin(0.5);
         this.input.keyboard.on('keydown-BACKSPACE', () => {
 			this.scene.stop('BaseScene')
+            this.scene.stop('HudScene')
 			this.scene.start('StartScene')
 		});
     }
