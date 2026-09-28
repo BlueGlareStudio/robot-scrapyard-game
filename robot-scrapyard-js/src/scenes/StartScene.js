@@ -10,8 +10,8 @@ class StartScene extends Phaser.Scene {
 		const centerY = this.scale.height / 2;
 		const titleText = this.add.text( centerX, (centerY - 150), 'Robot Scrapyard JS', {fill: '#ffffff', fontSize: '50px'}).setOrigin(0.5);
 		// The title splash text
-		const randInt = Phaser.Math.Between(0, 3);
-		const startText = ['IN A VAN DOWN BY THE RIVER', 'VEGAN FRIENDLY', 'NOT ROBOT FRIENDLY', 'MADE IN 2026'];
+		const randInt = Phaser.Math.Between(0, 4);
+		const startText = ['IN A VAN DOWN BY THE RIVER', 'VEGAN FRIENDLY', 'NOT ROBOT FRIENDLY', 'MADE WITH PHASER', 'by Blue Glare Studio'];
 		const splashText = this.add.text( centerX, (centerY - 100), startText[randInt], {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
 		// This tween animation causes the startText to flash
 		this.tweens.add({
@@ -29,5 +29,12 @@ class StartScene extends Phaser.Scene {
 			this.scene.stop('StartScene')
 			this.scene.start('BaseScene')
 		});
+		// Registry
+		//this.registry.set('armor', 0);
+		//this.registry.set('weaponDmg', 10);
+		this.registry.set('playerSpeed', 100);
+		//this.registry.set('scrap', 0);
+		//this.registry.set('oil', 0);
+		this.registry.set('score', 0);
 	}
 }

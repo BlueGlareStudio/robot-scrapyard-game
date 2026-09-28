@@ -10,11 +10,7 @@ class GameScene extends Phaser.Scene {
     enemyCollision(bullet, enemy) {
         bullet.destroy();
         enemy.destroy();
-        this.score += 50;
-        this.scoreText.setText('Score: ' + this.score);
-        if (this.score === 100) {
-            this.winGame();
-        }
+        this.registry.inc('score', 10);
     }
     spawnEnemy(texture) {
         let randX = Phaser.Math.Between(1, 1200);
@@ -32,10 +28,7 @@ class GameScene extends Phaser.Scene {
         this.physics.velocityFromRotation(angle, 500, bullet.body.velocity);    // Integer represents bullet speed
         bullet.roation = angle;
     }
-    winGame() {
-        // this.scene.pause('GameScene');
-        const winText = this.add.text(centerX, centerY, 'You Win!', {fill: '#ffffff', fontSize: '35px'}).setOrigin(0.5);
-    }
+
     preload() {
         this.load.image('player', 'assets/images/player.png');
         this.load.image('enemy', 'assets/images/enemy.png');
@@ -53,12 +46,8 @@ class GameScene extends Phaser.Scene {
             left: 'A',
             right: 'D'
         });
-        this.score = 0;
-        this.scoreText = this.add.text(centerX, (centerY + 300), 'Press R to Restart', {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
-        this.input.keyboard.on('keydown-R', () => {
-            this.scene.start('GameScene');
-        });
-
+        let score = this.registry.values.score;
+        
         // Player Setup
         this.player = this.physics.add.sprite(centerX, centerY, 'player').setScale(0.1);
         this.player.setCollideWorldBounds(true);
@@ -83,8 +72,12 @@ class GameScene extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.enemies, this.playerCollision, null, this);
         this.physics.add.overlap(this.bullets, this.enemies, this.enemyCollision, null, this);
 
-        // Return to Menu Text and Code
-        this.scoreText = this.add.text(centerX, (centerY - 275), 'Score: 0', {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
+        // Return to Base Setup
+        const restartText = this.add.text(centerX, (centerY + 300), 'Press R to Restart', {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
+        this.input.keyboard.on('keydown-R', () => {
+            this.scene.start('GameScene');
+        });
+        this.scoreText = this.add.text(centerX, (centerY - 275), `Score: ${score}`, {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
         this.add.text( centerX, (centerY - 300), 'BACKSPACE to return to Base', {fill: '#ffffff', fontSize: '15px'}).setOrigin(0.5);
         this.input.keyboard.on('keydown-BACKSPACE', () => {
 			this.scene.stop('GameScene')
@@ -94,7 +87,7 @@ class GameScene extends Phaser.Scene {
 
     update() {
         // Player Movement
-        let playerSpeed = 100;    // Default: 100
+        let playerSpeed = this.registry.values.playerSpeed;    // Default: 100
         if (this.moveKeys.left.isDown) {
             this.player.setFlipX(true);
             this.player.setVelocityX(-playerSpeed);
