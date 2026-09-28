@@ -1,1 +1,1 @@
-# robot-scrapyard-game
+# robot-scrapyard-js-game
