@@ -13,10 +13,6 @@ class BaseScene extends Phaser.Scene {
 		const centerY = this.scale.height / 2;
         this.physics.world.setBounds(0, 0, 1280, 720);
 
-        // Registry
-        let score = this.registry.values.score;
-        const scoreText = this.add.text(centerX, centerY - 250, `Score ${score}`, {fill: '#ffffff', fontSize: '40px'}).setOrigin(0.5);
-
         // Player Setup
         this.physics.add.sprite(centerX, centerY - 45, 'player').setScale(0.5);
 
@@ -26,8 +22,13 @@ class BaseScene extends Phaser.Scene {
         const playerAmmoUp = this.add.rectangle(centerX - 250, centerY - 150, 50, 50, 0x57f774).setInteractive();
         const playerAmmoUpText = this.add.text(centerX - 250, centerY - 150, '+', {fill: '#000000', fontSize: '20px'}).setOrigin(0.5); 
         playerAmmoUp.on('pointerdown', () => {
-            this.registry.inc('ammo', 10);
-            console.log('10 ammo added.');
+            if (score>= 10) {
+                this.registry.inc('ammo', 10);
+                this.registry.inc('score', -10);
+                console.log('10 ammo added.');
+            } else {
+                console.log('Not enough score for more ammo.');
+            }
         });
 
         // Speed
@@ -39,6 +40,7 @@ class BaseScene extends Phaser.Scene {
             if (score >= 100) {
                 this.registry.inc('playerSpeed', 15);
                 this.registry.inc('score', -100);
+                console.log('Speed upgraded.');
             } else {
                 console.log('Not enough score to upgrade speed.');
             }
@@ -53,6 +55,7 @@ class BaseScene extends Phaser.Scene {
             if (score >= 100) {
                 this.registry.inc('weaponDmg', 15);
                 this.registry.inc('score', -100);
+                console.log('Damage upgraded.');
             } else {
                 console.log('Not enough score to upgrade damage.');
             }
@@ -67,6 +70,7 @@ class BaseScene extends Phaser.Scene {
             if (score >= 100) {
                 this.registry.inc('armor', 15);
                 this.registry.inc('score', -100);
+                console.log('Armor upgraded.');
             } else {
                 console.log('Not enough score to upgrade armor.');
             }

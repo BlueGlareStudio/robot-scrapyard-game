@@ -51,8 +51,6 @@ class GameScene extends Phaser.Scene {
             left: 'A',
             right: 'D'
         });
-        let score = this.registry.values.score;
-        let ammo = this.registry.values.ammo;
         
         // Player Setup
         this.player = this.physics.add.sprite(centerX, centerY, 'player').setScale(0.1);
@@ -83,8 +81,6 @@ class GameScene extends Phaser.Scene {
         this.input.keyboard.on('keydown-R', () => {
             this.scene.start('GameScene');
         });
-        this.scoreText = this.add.text(centerX, (centerY - 275), `Score: ${score}`, {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
-        this.ammoText = this.add.text(centerX, (centerY - 200), `Ammo: ${ammo}`, {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
         this.add.text( centerX, (centerY - 300), 'BACKSPACE to return to Base', {fill: '#ffffff', fontSize: '15px'}).setOrigin(0.5);
         this.input.keyboard.on('keydown-BACKSPACE', () => {
 			this.scene.stop('GameScene')
