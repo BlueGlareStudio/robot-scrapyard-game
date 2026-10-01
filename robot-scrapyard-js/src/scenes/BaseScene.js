@@ -15,6 +15,12 @@ class BaseScene extends Phaser.Scene {
 
         // Player Setup
         this.physics.add.sprite(centerX, centerY - 45, 'player').setScale(0.5);
+        let score = this.registry.values.score;
+        let ammo = this.registry.values.ammo;
+        // Event Listener
+        this.registry.events.on('changedata-score', (parent, value) => {
+            this.score += value;
+        });
 
         // Ammo
         const playerAmmoLabel = this.add.rectangle(centerX - 375, centerY - 150, 200, 50, 0x363636);
@@ -22,7 +28,7 @@ class BaseScene extends Phaser.Scene {
         const playerAmmoUp = this.add.rectangle(centerX - 250, centerY - 150, 50, 50, 0x57f774).setInteractive();
         const playerAmmoUpText = this.add.text(centerX - 250, centerY - 150, '+', {fill: '#000000', fontSize: '20px'}).setOrigin(0.5); 
         playerAmmoUp.on('pointerdown', () => {
-            if (score>= 10) {
+            if (score >= 10) {
                 this.registry.inc('ammo', 10);
                 this.registry.inc('score', -10);
                 console.log('10 ammo added.');
@@ -79,7 +85,7 @@ class BaseScene extends Phaser.Scene {
         // Game Button
 		const gameButton = this.add.rectangle(centerX + 500, centerY + 300, 200, 50, 0x363636).setInteractive();
 		const gameButtonText = this.add.text( centerX + 500, centerY + 300, 'Fight', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
-
+        
 		// This changes the scene from 'BaseScene' to 'GameScene'
 		gameButton.on('pointerup', () => {
 			this.scene.stop('BaseScene')

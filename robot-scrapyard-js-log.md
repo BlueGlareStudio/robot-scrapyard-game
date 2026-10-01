@@ -95,3 +95,11 @@ A base resolution for the game was set (width: 1280, height: 720). A scaling obj
 
 I moved the score and ammo texts into 'HudScene'.
 
+
+
+### Sept 30 2026
+
+
+
+The live counts in the 'HudScene' are working for the existing 'ammo' and 'score' values within the registry. The in-game currency will be the current 'score' value. Player stats and the rest of the materials should be added next. There is an error with the shop decreasing the values below 0.
+

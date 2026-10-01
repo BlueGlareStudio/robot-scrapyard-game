@@ -17,18 +17,19 @@ class GameScene extends Phaser.Scene {
         let randY = Phaser.Math.Between(1, 700);
         const enemy = this.enemies.create(randX, randY, texture).setScale(0.1);
     }
+
     fireBullet(pointer) {
         if (this.registry.values.ammo > 0) {
+            this.registry.inc('ammo', -1);
             let bullet = this.bullets.get(this.player.x, this.player.y).setScale(0.1);
             if (bullet) {
                 bullet.setActive(true);
                 bullet.setVisible(true);
-                bullet.setPosition(this.player.x, this.player.y);
             }
+            bullet.setPosition(this.player.x, this.player.y);
             let angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, pointer.x, pointer.y);
-            this.physics.velocityFromRotation(angle, 500, bullet.body.velocity);    // Integer represents bullet speed
+            this.physics.velocityFromRotation(angle, 1000, bullet.body.velocity);    // Integer represents bullet speed
             bullet.roation = angle;
-            this.registry.inc('ammo', -1);
         } else {
             console.log('OUT OF AMMO');
         }

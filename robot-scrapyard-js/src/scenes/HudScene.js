@@ -13,16 +13,19 @@ class HudScene extends Phaser.Scene {
 		const centerY = this.scale.height / 2;
         // Ammo
         let ammo = this.registry.values.ammo;
-        this.ammoText = this.add.text(centerX, (centerY - 200), `Ammo: ${ammo}`, {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
+        let ammoText = this.add.text(centerX, (centerY - 200), `Ammo ${ammo}`, {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
         // Score
         let score = this.registry.values.score;
-        const scoreText = this.add.text(centerX, centerY - 250, `Score ${score}`, {fill: '#ffffff', fontSize: '40px'}).setOrigin(0.5);
+        let scoreText = this.add.text(centerX, centerY - 250, `Score ${score}`, {fill: '#ffffff', fontSize: '40px'}).setOrigin(0.5);
         // Controls
 		const controlsButton = this.add.rectangle(centerX, centerY - 325, 500, 30, 0x363636);
 		const hudText = this.add.text(centerX, centerY - 325, `WASD:Move LFT-Click:Shoot`, {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
-        // Event Listeners
+        // Event Listener
         this.registry.events.on('changedata-score', (parent, value) => {
-            
+            scoreText.setText('Score ' + value);
+        });
+        this.registry.events.on('changedata-ammo', (parent, value) => {
+            ammoText.setText('Ammo ' + value);
         });
 	}
 }

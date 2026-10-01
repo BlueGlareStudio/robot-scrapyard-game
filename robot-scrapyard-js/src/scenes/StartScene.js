@@ -36,7 +36,7 @@ class StartScene extends Phaser.Scene {
 		this.registry.set('playerSpeed', 100);
 		//this.registry.set('scrap', 0);
 		//this.registry.set('oil', 0);
-		this.registry.set('score', 0);
-        this.registry.set('ammo', 30);
+		this.registry.set('score', 50);
+        this.registry.set('ammo', 10);
 	}
 }
