@@ -14,7 +14,7 @@ class BaseScene extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, 1280, 720);
 
         // Player Setup
-        this.physics.add.sprite(centerX, centerY - 45, 'player').setScale(0.5);
+        this.physics.add.sprite(centerX, centerY - 45, 'player').setScale(4);
         let score = this.registry.values.score;
         let ammo = this.registry.values.ammo;
         // Event Listener

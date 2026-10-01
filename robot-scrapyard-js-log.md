@@ -103,3 +103,11 @@ I moved the score and ammo texts into 'HudScene'.
 
 The live counts in the 'HudScene' are working for the existing 'ammo' and 'score' values within the registry. The in-game currency will be the current 'score' value. Player stats and the rest of the materials should be added next. There is an error with the shop decreasing the values below 0.
 
+
+
+### Oct 1 2026
+
+
+
+I downloaded Krita and created placeholder images for 'player', 'enemy', and 'bullet'.
+
