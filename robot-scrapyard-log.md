@@ -1,0 +1,129 @@
+### **Robot Scrapyard JS Log**
+
+### Sept 12 2026
+
+
+
+Beginning of development. Framwork for game completed. The game window with text was created.
+
+
+
+### Sept 13 2026
+
+
+
+The player was added with placeholder sprite. Movement was added along the play area.
+
+
+
+### Sept 16 2026
+
+
+
+A series of social media accounts were made for Blue Glare Studio:
+
+* Instagram
+* Google Account
+* GitHub
+* X (Twitter)
+* YouTube
+* TikTok
+* itch.io account
+* Steam account
+
+
+
+### Sept 17 2026
+
+
+
+A discord account was created for Blue Glare Studio and a discord channel was created. This channel is intended to be the foundation for the game studio. It will be a hub for all the HTML5 games.
+
+
+
+### Sept 19 2026
+
+
+
+The movement, physics, and basic collision for the player was implemented. The player turns red for a few hundred miliseconds when colliding with an enemy. The enemy group was added. An enemy spawn function was created. The space key temporarily spawns enemies for now. Both the enemies and player collide with world bounds. When the spawnEnemy function is called, it creates a random x and random y for the new enemy child to spawn. The WASD keys were bound to the new movement instead of the arrows. An Unity account was made and the game engine was downloaded.
+
+
+
+### Sept 21 2026
+
+
+
+A basic shooting animation has been implemented. I'm using a placeholder sprite for the bullet, as well as the player and enemy. There is an input taken from the mouse and it calculates where to send the bullet sprite to. I have the methods set up and plan on implementing a collision mechanic. An interactive button was created for the start screen. It is temporary and is using Phaser's createRectangle() method with a text overlay. An interactive sprite will be created later in development along with a completed start screen, which includes designed interactive buttons, background, art style, etc.
+
+
+
+### Sept 23 2026
+
+
+
+The framework for the collision detection between enemies and the player's bullets was created. I was having issues previously with this system. There error was that the line for the collision was too high up on the script. The bullet group was added after, not before like it should be. It was fixed. A small list was created for the splash text that appears below the title of the game at the start screen. It randomly chooses between the few options that were hardcoded. It is similar to Minecraft. A small text on the GameScene was added to display the score. The score system adds 10 points whenever an enemy is hit with a bullet. A win and lose condition needs to be set.
+
+
+
+### Sept 24 2026
+
+
+
+A restart/try again feature was added to the 'GameScene' scene. A for loop was added to spawn 10 enemies at random positions at start of 'GameScene.'
+
+
+
+### Sept 26 2026
+
+
+
+I refactored some of the code within the 'StartScene' and 'GameScene' files to group sections of the code together. A 'BaseScene' was also created and implemented to be used as the upgrade/trophy section of the game. A series of buttons were added to test increasing and decreasing player stats amongst all the levels or 'scenes'. This scene will be used later for player upgrades and loadout selection before starting a round of the game. A flow was added for the scenes ('StartScene' <-> 'BaseScene' <-> 'GameScene'). The Phaser registry is my next goal. It is the built-in data manager. I need to set up the main values of the game (player health and armor, score, stats, loadout, cash, scrap, oil, etc.).
+
+
+
+### Sept 28 2026
+
+
+
+A base resolution for the game was set (width: 1280, height: 720). A scaling object was added to 'main.js'. The Phaser.Scale.FIT and Phaser.Scale.CENTER\_BOTH were added to scale the game window to help fit whatever device is being used. A feature within the enemyCollision() method that increments the 'score' value when an enemy is destroyed. Within the 'BaseScene', the upgrade buttons work with registry code. A HUD feature was added with the 'HudScene'. Basic control texts are being used to test HUD. An ammo registry value was created and an registry ammo counter was created. CURRENTLY NONE OF THE REGISTRY VALUES ARE LIVE.
+
+
+
+### Sept 29 2026
+
+
+
+I moved the score and ammo texts into 'HudScene'.
+
+
+
+### Sept 30 2026
+
+
+
+The live counts in the 'HudScene' are working for the existing 'ammo' and 'score' values within the registry. The in-game currency will be the current 'score' value. Player stats and the rest of the materials should be added next. There is an error with the shop decreasing the values below 0.
+
+
+
+### Oct 1 2026
+
+
+
+I downloaded Krita and created placeholder images for 'player', 'enemy', and 'bullet'.
+
+
+
+### Oct 3 2026
+
+
+
+I started working on cover image for 'Robot Scrapyard' for itch.io. A few ideas are laid out in text, but the final design is uncertain.
+
+
+
+### Oct 4 2026
+
+
+
+A draft for two enemy sprites and the player model were created. Touch-ups are needed. 
+
