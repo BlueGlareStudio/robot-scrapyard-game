@@ -1,4 +1,4 @@
-### **Robot Scrapyard JS Log**
+### **Robot Scrapyard Log**
 
 ### Sept 12 2026
 
@@ -125,5 +125,13 @@ I started working on cover image for 'Robot Scrapyard' for itch.io. A few ideas 
 
 
 
-A draft for two enemy sprites and the player model were created. Touch-ups are needed. 
+A draft for two enemy sprites and the player model were created. Touch-ups are needed.
+
+
+
+### Oct 9 2026
+
+
+
+The 'enemy3' sprite has been made more symmetrical. A temporary background image was created for the 'GameScene'. A template for in-game buttons was created and applied to all interactive buttons. Updated the profile of some of the socials (itch.io, steam, discord).
 

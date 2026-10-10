@@ -5,6 +5,7 @@ class BaseScene extends Phaser.Scene {
 
     preload() {
         this.load.image('player', '/assets/images/player.png');
+        this.load.image('button', '/assets/images/button.png');
     }
 
     create() {
@@ -14,7 +15,7 @@ class BaseScene extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, 1280, 720);
 
         // Player Setup
-        this.physics.add.sprite(centerX, centerY - 45, 'player').setScale(4);
+        this.physics.add.sprite(centerX, centerY - 45, 'player').setScale(3);
         let score = this.registry.values.score;
         let ammo = this.registry.values.ammo;
         // Event Listener
@@ -23,7 +24,7 @@ class BaseScene extends Phaser.Scene {
         });
 
         // Ammo
-        const playerAmmoLabel = this.add.rectangle(centerX - 375, centerY - 150, 200, 50, 0x363636);
+        const playerAmmoLabel = this.add.image(centerX - 375, centerY - 150, 'button');
 		const playerAmmoLabelText = this.add.text(centerX - 375, centerY - 150, 'Ammo', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
         const playerAmmoUp = this.add.rectangle(centerX - 250, centerY - 150, 50, 50, 0x57f774).setInteractive();
         const playerAmmoUpText = this.add.text(centerX - 250, centerY - 150, '+', {fill: '#000000', fontSize: '20px'}).setOrigin(0.5); 
@@ -38,7 +39,7 @@ class BaseScene extends Phaser.Scene {
         });
 
         // Speed
-        const playerSpeedLabel = this.add.rectangle(centerX + 375, centerY + 50, 200, 50, 0x363636);
+        const playerSpeedLabel = this.add.image(centerX + 375, centerY + 50, 'button');
 		const playerSpeedLabelText = this.add.text(centerX + 375, centerY + 50, 'Speed', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
         const playerSpeedUp = this.add.rectangle(centerX + 500, centerY + 50, 50, 50, 0x57f774).setInteractive();
         const playerSpeedUpText = this.add.text(centerX + 500, centerY + 50, '+', {fill: '#000000', fontSize: '20px'}).setOrigin(0.5); 
@@ -53,7 +54,7 @@ class BaseScene extends Phaser.Scene {
         });
 
         // Weapon Dmg
-        const playerDmgLabel = this.add.rectangle(centerX + 375, centerY - 50, 200, 50, 0x363636);
+        const playerDmgLabel = this.add.image(centerX + 375, centerY - 50, 'button');
 		const playerDmgLabelText = this.add.text(centerX + 375, centerY - 50, 'Weapon Dmg', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
         const playerDmgUp = this.add.rectangle(centerX + 500, centerY - 50, 50, 50, 0x57f774).setInteractive();
         const playerDmgUpText = this.add.text(centerX + 500, centerY - 50, '+', {fill: '#000000', fontSize: '20px'}).setOrigin(0.5);
@@ -68,7 +69,7 @@ class BaseScene extends Phaser.Scene {
         });
 
         // Armor
-        const playerArmorLabel = this.add.rectangle(centerX + 375, centerY - 150, 200, 50, 0x363636);
+        const playerArmorLabel = this.add.image(centerX + 375, centerY - 150, 'button');
 		const playerArmorLabelText = this.add.text(centerX + 375, centerY - 150, 'Armor', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
         const playerArmorUp = this.add.rectangle(centerX + 500, centerY - 150, 50, 50, 0x57f774).setInteractive();
         const playerArmorUpText = this.add.text(centerX + 500, centerY - 150, '+', {fill: '#000000', fontSize: '20px'}).setOrigin(0.5);
@@ -83,7 +84,7 @@ class BaseScene extends Phaser.Scene {
         });
 
         // Game Button
-		const gameButton = this.add.rectangle(centerX + 500, centerY + 300, 200, 50, 0x363636).setInteractive();
+		const gameButton = this.add.image(centerX + 500, centerY + 300, 'button').setInteractive();
 		const gameButtonText = this.add.text( centerX + 500, centerY + 300, 'Fight', {fill: '#ffffff', fontSize: '20px'}).setOrigin(0.5);
         
 		// This changes the scene from 'BaseScene' to 'GameScene'

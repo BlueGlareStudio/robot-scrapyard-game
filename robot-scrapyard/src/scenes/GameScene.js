@@ -21,7 +21,7 @@ class GameScene extends Phaser.Scene {
     fireBullet(pointer) {
         if (this.registry.values.ammo > 0) {
             this.registry.inc('ammo', -1);
-            let bullet = this.bullets.get(this.player.x, this.player.y).setScale(1);
+            let bullet = this.bullets.get(this.player.x, this.player.y).setScale(0.5);
             if (bullet) {
                 bullet.setActive(true);
                 bullet.setVisible(true);
@@ -39,6 +39,7 @@ class GameScene extends Phaser.Scene {
         this.load.image('player', 'assets/images/player.png');
         this.load.image('enemy', 'assets/images/enemy.png');
         this.load.image('bullet', 'assets/images/bullet.png');
+        this.load.image('bg', 'assets/images/background1.png');
     }
 
     create() {
@@ -46,6 +47,7 @@ class GameScene extends Phaser.Scene {
         const centerX = this.scale.width / 2;
 		const centerY = this.scale.height / 2;
         this.physics.world.setBounds(0, 0, 1280, 720);
+        const background = this.add.image(0, 0, 'bg').setOrigin(0, 0);
         this.moveKeys = this.input.keyboard.addKeys({
             up: 'W',
             down: 'S',
@@ -54,7 +56,7 @@ class GameScene extends Phaser.Scene {
         });
         
         // Player Setup
-        this.player = this.physics.add.sprite(centerX, centerY, 'player').setScale(1.5);
+        this.player = this.physics.add.sprite(centerX, centerY, 'player').setScale(1);
         this.player.setCollideWorldBounds(true);
 
         // Enemy Setup
@@ -78,11 +80,11 @@ class GameScene extends Phaser.Scene {
         this.physics.add.overlap(this.bullets, this.enemies, this.enemyCollision, null, this);
 
         // Return to Base Setup
-        const restartText = this.add.text(centerX, (centerY + 300), 'Press R to Restart', {fill: '#ffffff', fontSize: '25px'}).setOrigin(0.5);
+        const restartText = this.add.text(centerX, (centerY + 300), 'Press R to Restart', {fill: '#000000', fontSize: '25px'}).setOrigin(0.5);
         this.input.keyboard.on('keydown-R', () => {
             this.scene.start('GameScene');
         });
-        this.add.text( centerX, (centerY - 300), 'BACKSPACE to return to Base', {fill: '#ffffff', fontSize: '15px'}).setOrigin(0.5);
+        this.add.text( centerX, (centerY - 300), 'BACKSPACE to return to Base', {fill: '#000000', fontSize: '15px'}).setOrigin(0.5);
         this.input.keyboard.on('keydown-BACKSPACE', () => {
 			this.scene.stop('GameScene')
 			this.scene.start('BaseScene')
